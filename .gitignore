@@ -1,0 +1,11 @@
+/*.idea
+/*target
+*.class
+
+/src/main/java/Main.java
+/src/main/resources/Db.txt
+
+*.iml
+*.war
+*.jar
+*.ear
