@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.sql.Date;
 
+//Entity for weather_stat table
 @Entity
 public  class WeatherStat {
 
@@ -70,7 +71,7 @@ public  class WeatherStat {
 
     @Override
     public String toString() {
-        return "WeatherStatistic{" +
+        return "WeatherStat{" +
                 "id=" + id +
                 ", cityName='" + cityName + '\'' +
                 ", date=" + date +

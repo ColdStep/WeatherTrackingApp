@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.Calendar;
+
 
 @Controller
 @ComponentScan
@@ -25,17 +27,7 @@ public class MainController {
     @Autowired
     private WeatherStatRepository weatherStatRepository;
 
-    @GetMapping(path="/save")
-    public @ResponseBody String addWeather (@RequestParam String name
-            , @RequestParam String temp) {
-
-        WeatherStat weatherStat = new WeatherStat();
-        weatherStat.setCityName(name);
-        weatherStat.setTemperature(temp);
-        weatherStatRepository.save(weatherStat);
-        return "Saved";
-    }
-
+    //Method to response Local weather
     @GetMapping(path="/getweather")
     public @ResponseBody String getWeather(){
         RestTemplate restTemplate = new RestTemplate();
@@ -66,7 +58,7 @@ public class MainController {
 
         return weatherResult.toString();
     }
-
+    //Method to get statistic from all weather which is on DB
     @GetMapping(path = "/stat")
     public @ResponseBody String getStat(){
         WeatherStatistic weatherStatistic = new WeatherStatistic();
@@ -78,11 +70,29 @@ public class MainController {
 
     }
 
+//Method for get statistic about a certain period
+    @GetMapping(path = "/datepicker")
+    public @ResponseBody String getStatFrom(@RequestParam(defaultValue = "0") String startDate, @RequestParam(defaultValue = "0") String endDate){
+       if (startDate.equals("0" )&& endDate.equals("0")){
+           Calendar calendar = Calendar.getInstance();
+           endDate = new java.sql.Date(calendar.getTimeInMillis()).toString();
+           calendar.add(Calendar.DAY_OF_MONTH, -7);
+           startDate = new java.sql.Date(calendar.getTimeInMillis()).toString();
+       }
+        WeatherStatistic weatherStatistic = new WeatherStatistic();
+        weatherStatistic.setWeatherStatList(weatherStatRepository.getFromPeriod(startDate,endDate));
+        weatherStatistic.setMaxTemperature(weatherStatRepository.getMaxTempDayFromPeriod(startDate,endDate));
+        weatherStatistic.setMinTemperature(weatherStatRepository.getMinTempDayFromPeriod(startDate,endDate));
+        weatherStatistic.setAvarageTemperature(weatherStatRepository.getAvgFromPeriod(startDate,endDate));
+        return new Gson().toJson(weatherStatistic);
+    }
+
+    // get all data from DB
     @GetMapping(path="/all")
     public @ResponseBody Iterable<WeatherStat> getAllUsers() {
         return weatherStatRepository.findAll();
     }
-
+    //delete all data from DB
     @GetMapping(path = "/deleteall")
     public @ResponseBody String deleteAll(){
         weatherStatRepository.deleteAll();

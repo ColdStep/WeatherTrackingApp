@@ -2,11 +2,23 @@ package Application.Model.WeatherComponent;
 
 import Application.Model.entity.WeatherStat;
 
+import java.util.List;
+
+//this class was created to have statistic
 public class WeatherStatistic {
 
+    List<WeatherStat> weatherStatList;
     WeatherStat minTemperature;
     WeatherStat maxTemperature;
     String avarageTemperature;
+
+    public List<WeatherStat> getWeatherStatList() {
+        return weatherStatList;
+    }
+
+    public void setWeatherStatList(List<WeatherStat> weatherStatList) {
+        this.weatherStatList = weatherStatList;
+    }
 
     public WeatherStat getMinTemperature() {
         return minTemperature;
@@ -34,9 +46,11 @@ public class WeatherStatistic {
 
     @Override
     public String toString() {
+        System.out.println("Boom");
         return "WeatherStatistic{" +
-                "minTemperature=" + minTemperature +
-                ", maxTemperature=" + maxTemperature +
+                "weatherStatList=" + weatherStatList.toString() +
+                ", minTemperature=" + minTemperature.toString() +
+                ", maxTemperature=" + maxTemperature.toString() +
                 ", avarageTemperature='" + avarageTemperature + '\'' +
                 '}';
     }

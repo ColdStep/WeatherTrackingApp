@@ -1,6 +1,6 @@
 package Application.Model.WeatherComponent;
 
-
+// class for parsing Json to Object
 public class WeatherResult {
     Coord coord;
     Weather[] weather;
