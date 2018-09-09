@@ -67,4 +67,15 @@ public  class WeatherStat {
     public void setWeather(String weather) {
         this.weather = weather;
     }
+
+    @Override
+    public String toString() {
+        return "WeatherStatistic{" +
+                "id=" + id +
+                ", cityName='" + cityName + '\'' +
+                ", date=" + date +
+                ", temperature='" + temperature + '\'' +
+                ", weather='" + weather + '\'' +
+                '}';
+    }
 }

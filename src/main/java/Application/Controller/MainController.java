@@ -2,6 +2,7 @@ package Application.Controller;
 
 
 import Application.Model.WeatherComponent.WeatherResult;
+import Application.Model.WeatherComponent.WeatherStatistic;
 import Application.Model.entity.WeatherStat;
 import Application.Model.repository.WeatherStatRepository;
 import com.google.gson.Gson;
@@ -19,9 +20,9 @@ import org.springframework.web.client.RestTemplate;
 @ComponentScan
 @RequestMapping(path="/weather")
 public class MainController {
+
+
     @Autowired
-
-
     private WeatherStatRepository weatherStatRepository;
 
     @GetMapping(path="/save")
@@ -52,13 +53,39 @@ public class MainController {
                 weatherResult.getSys()+
                 weatherResult.getWeather()+
                 weatherResult.getWind());
-        weatherStatRepository.save(weatherStat);
+
+        if  (weatherStatRepository.existsByDate(weatherStat.getDate().toString(),weatherStat.getCityName()).toString().matches("1")){
+             weatherStatRepository.updateWeather(
+                    weatherStat.getTemperature(),
+                     weatherStat.getWeather(),
+                    weatherStat.getDate().toString(),
+                    weatherStat.getCityName());
+        }else {
+            weatherStatRepository.save(weatherStat);
+        }
 
         return weatherResult.toString();
     }
+
+    @GetMapping(path = "/stat")
+    public @ResponseBody String getStat(){
+        WeatherStatistic weatherStatistic = new WeatherStatistic();
+        weatherStatistic.setMinTemperature(weatherStatRepository.getMinTempDay());
+        weatherStatistic.setMaxTemperature(weatherStatRepository.getMaxTempDay());
+        weatherStatistic.setAvarageTemperature(weatherStatRepository.getAvg());
+        return new Gson().toJson(weatherStatistic);
+
+
+    }
+
     @GetMapping(path="/all")
     public @ResponseBody Iterable<WeatherStat> getAllUsers() {
-        // This returns a JSON or XML with the users
         return weatherStatRepository.findAll();
+    }
+
+    @GetMapping(path = "/deleteall")
+    public @ResponseBody String deleteAll(){
+        weatherStatRepository.deleteAll();
+        return "All delete";
     }
 }
