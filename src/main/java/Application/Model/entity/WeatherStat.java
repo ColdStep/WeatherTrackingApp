@@ -14,7 +14,7 @@ public  class WeatherStat {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private long id;
 
     private  String cityName;
 
@@ -29,7 +29,7 @@ public  class WeatherStat {
     }
 
 
-    public Integer getId() {
+    public long getId() {
         return id;
     }
 

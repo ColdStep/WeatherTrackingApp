@@ -24,19 +24,19 @@ public interface WeatherStatRepository extends CrudRepository<WeatherStat,Intege
     List<WeatherStat> getFromPeriod(String startDate, String endDate);
 
     @Query(value = "SELECT * FROM weather_stat WHERE weather_stat.temperature = ( SELECT MAX(w.temperature) FROM weather_stat w WHERE  w.date BETWEEN ?1 and ?2)",nativeQuery = true)
-    WeatherStat getMaxTempDayFromPeriod(String startDate, String endDate);
+    List<WeatherStat> getMaxTempDayFromPeriod(String startDate, String endDate);
 
     @Query(value = "SELECT * FROM weather_stat WHERE weather_stat.temperature = ( SELECT  MIN(w.temperature) FROM weather_stat w WHERE  w.date BETWEEN ?1 and ?2)",nativeQuery = true)
-    WeatherStat getMinTempDayFromPeriod(String startDate, String endDate);
+    List<WeatherStat> getMinTempDayFromPeriod(String startDate, String endDate);
 
     @Query(value = "SELECT  AVG (w.temperature) FROM  weather_stat w WHERE w.date BETWEEN ?1 AND ?2", nativeQuery = true)
     String getAvgFromPeriod(String startDate, String endDate);
 
     @Query(value = "SELECT * FROM weather_stat WHERE weather_stat.temperature = ( SELECT MAX(weather_stat.temperature) FROM weather_stat)",nativeQuery = true)
-    WeatherStat getMaxTempDay();
+    List<WeatherStat> getMaxTempDay();
 
     @Query(value = "SELECT * FROM weather_stat WHERE weather_stat.temperature = ( SELECT MIN(weather_stat.temperature) FROM weather_stat)",nativeQuery = true)
-    WeatherStat getMinTempDay();
+    List<WeatherStat> getMinTempDay();
 
     @Query("select avg (w.temperature) from WeatherStat w")
     String getAvg( );

@@ -8,8 +8,8 @@ import java.util.List;
 public class WeatherStatistic {
 
     List<WeatherStat> weatherStatList;
-    WeatherStat minTemperature;
-    WeatherStat maxTemperature;
+    List<WeatherStat> minTemperature;
+    List<WeatherStat> maxTemperature;
     String avarageTemperature;
 
     public List<WeatherStat> getWeatherStatList() {
@@ -20,19 +20,19 @@ public class WeatherStatistic {
         this.weatherStatList = weatherStatList;
     }
 
-    public WeatherStat getMinTemperature() {
+    public List<WeatherStat> getMinTemperature() {
         return minTemperature;
     }
 
-    public void setMinTemperature(WeatherStat minTemperature) {
+    public void setMinTemperature(List<WeatherStat> minTemperature) {
         this.minTemperature = minTemperature;
     }
 
-    public WeatherStat getMaxTemperature() {
+    public List<WeatherStat> getMaxTemperature() {
         return maxTemperature;
     }
 
-    public void setMaxTemperature(WeatherStat maxTemperature) {
+    public void setMaxTemperature(List<WeatherStat> maxTemperature) {
         this.maxTemperature = maxTemperature;
     }
 

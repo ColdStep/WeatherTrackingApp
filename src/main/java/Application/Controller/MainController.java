@@ -79,6 +79,7 @@ public class MainController {
            calendar.add(Calendar.DAY_OF_MONTH, -7);
            startDate = new java.sql.Date(calendar.getTimeInMillis()).toString();
        }
+
         WeatherStatistic weatherStatistic = new WeatherStatistic();
         weatherStatistic.setWeatherStatList(weatherStatRepository.getFromPeriod(startDate,endDate));
         weatherStatistic.setMaxTemperature(weatherStatRepository.getMaxTempDayFromPeriod(startDate,endDate));
