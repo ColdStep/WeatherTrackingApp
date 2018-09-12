@@ -1,4 +1,4 @@
-package Application.Model.entity;
+package Application.model.entity;
 
 
 import javax.persistence.Entity;
@@ -79,4 +79,5 @@ public  class WeatherStat {
                 ", weather='" + weather + '\'' +
                 '}';
     }
+
 }

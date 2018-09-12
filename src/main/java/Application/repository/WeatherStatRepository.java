@@ -1,6 +1,6 @@
-package Application.Model.repository;
+package Application.repository;
 
-import Application.Model.entity.WeatherStat;
+import Application.model.entity.WeatherStat;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;

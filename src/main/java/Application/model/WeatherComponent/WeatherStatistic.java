@@ -1,16 +1,16 @@
-package Application.Model.WeatherComponent;
+package Application.model.WeatherComponent;
 
-import Application.Model.entity.WeatherStat;
+import Application.model.entity.WeatherStat;
 
 import java.util.List;
 
 //this class was created to have statistic
 public class WeatherStatistic {
 
-    List<WeatherStat> weatherStatList;
-    List<WeatherStat> minTemperature;
-    List<WeatherStat> maxTemperature;
-    String avarageTemperature;
+    private List<WeatherStat> weatherStatList;
+    private List<WeatherStat> minTemperature;
+    private List<WeatherStat> maxTemperature;
+    private String avarageTemperature;
 
     public List<WeatherStat> getWeatherStatList() {
         return weatherStatList;

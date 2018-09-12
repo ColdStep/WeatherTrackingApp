@@ -1,4 +1,4 @@
-package Application.Model.WeatherComponent;
+package Application.model.WeatherComponent;
 
 // class for parsing Json to Object
 public class WeatherResult {
