@@ -46,7 +46,7 @@ public class WeatherStatistic {
 
     @Override
     public String toString() {
-        System.out.println("Boom");
+
         return "WeatherStatistic{" +
                 "weatherStatList=" + weatherStatList.toString() +
                 ", minTemperature=" + minTemperature.toString() +
