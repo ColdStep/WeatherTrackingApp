@@ -23,7 +23,7 @@ import java.util.Calendar;
 public class MainController {
 
 
-    @Resource
+    @Autowired
     private WeatherStatServiceImpl weatherStatService;
     //Method to response Local weather
     @GetMapping(path="/getweather")

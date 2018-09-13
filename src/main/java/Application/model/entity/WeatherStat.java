@@ -16,7 +16,7 @@ public  class WeatherStat {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    private  String cityName;
+    private String cityName;
 
     private Date date;
 
@@ -80,4 +80,24 @@ public  class WeatherStat {
                 '}';
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        WeatherStat that = (WeatherStat) o;
+
+        if (id != that.id) return false;
+        if (!cityName.equals(that.cityName)) return false;
+        return date.equals(that.date);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = (int) (id ^ (id >>> 32));
+        result = 31 * result + cityName.hashCode();
+        result = 31 * result + date.hashCode();
+        return result;
+    }
 }
+
