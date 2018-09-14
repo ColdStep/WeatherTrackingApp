@@ -1,0 +1,8 @@
+CREATE TABLE `weathertrack`.`weather_stat` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `date` VARCHAR(200) NOT NULL,
+  `weather_data` JSON NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
