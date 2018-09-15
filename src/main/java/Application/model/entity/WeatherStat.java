@@ -1,16 +1,20 @@
 package Application.model.entity;
 
 
+import Application.dto.MainInfoDto;
+import Application.dto.WeatherDto;
+import Application.model.WeatherComponent.WeatherResult;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.sql.Date;
+import java.util.List;
 
 //Entity for weather_stat table
 @Entity
 public  class WeatherStat {
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -18,11 +22,29 @@ public  class WeatherStat {
 
     private String cityName;
 
+    private String country;
+
     private Date date;
 
-    private String temperature;
+    private int temperature;
+
+    private int humidity;
+
+    private int pressure;
 
     private String weather;
+
+    private String coord;
+
+    private String wind;
+
+    private int cityCod;
+
+    private Date sunrise;
+
+    private Date senset;
+
+
 
 
     public WeatherStat() {
@@ -33,7 +55,7 @@ public  class WeatherStat {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -45,20 +67,44 @@ public  class WeatherStat {
         this.cityName = cityName;
     }
 
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
     public Date getDate() {
         return date;
     }
 
-    public void setDate(java.sql.Date date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
-    public String getTemperature() {
+    public int getTemperature() {
         return temperature;
     }
 
-    public void setTemperature(String temperature) {
+    public void setTemperature(int temperature) {
         this.temperature = temperature;
+    }
+
+    public int getHumidity() {
+        return humidity;
+    }
+
+    public void setHumidity(int humidity) {
+        this.humidity = humidity;
+    }
+
+    public int getPressure() {
+        return pressure;
+    }
+
+    public void setPressure(int pressure) {
+        this.pressure = pressure;
     }
 
     public String getWeather() {
@@ -69,14 +115,62 @@ public  class WeatherStat {
         this.weather = weather;
     }
 
+    public String getCoord() {
+        return coord;
+    }
+
+    public void setCoord(String coord) {
+        this.coord = coord;
+    }
+
+    public String getWind() {
+        return wind;
+    }
+
+    public void setWind(String wind) {
+        this.wind = wind;
+    }
+
+    public int getCityCod() {
+        return cityCod;
+    }
+
+    public void setCityCod(int cityCod) {
+        this.cityCod = cityCod;
+    }
+
+    public Date getSunrise() {
+        return sunrise;
+    }
+
+    public void setSunrise(Date sunrise) {
+        this.sunrise = sunrise;
+    }
+
+    public Date getSenset() {
+        return senset;
+    }
+
+    public void setSenset(Date senset) {
+        this.senset = senset;
+    }
+
     @Override
     public String toString() {
         return "WeatherStat{" +
                 "id=" + id +
                 ", cityName='" + cityName + '\'' +
+                ", country='" + country + '\'' +
                 ", date=" + date +
-                ", temperature='" + temperature + '\'' +
+                ", temperature=" + temperature +
+                ", humidity=" + humidity +
+                ", pressure=" + pressure +
                 ", weather='" + weather + '\'' +
+                ", coord='" + coord + '\'' +
+                ", wind='" + wind + '\'' +
+                ", cityCod=" + cityCod +
+                ", sunrise=" + sunrise +
+                ", senset=" + senset +
                 '}';
     }
 
@@ -88,6 +182,7 @@ public  class WeatherStat {
         WeatherStat that = (WeatherStat) o;
 
         if (id != that.id) return false;
+        if (cityCod != that.cityCod) return false;
         if (!cityName.equals(that.cityName)) return false;
         return date.equals(that.date);
     }
@@ -97,6 +192,7 @@ public  class WeatherStat {
         int result = (int) (id ^ (id >>> 32));
         result = 31 * result + cityName.hashCode();
         result = 31 * result + date.hashCode();
+        result = 31 * result + cityCod;
         return result;
     }
 }

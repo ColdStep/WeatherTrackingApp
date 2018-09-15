@@ -1,20 +1,14 @@
 package Application.controller;
 
 
-import Application.model.WeatherComponent.WeatherResult;
-import Application.model.WeatherComponent.WeatherStatistic;
 import Application.model.entity.WeatherStat;
-import Application.repository.WeatherStatRepository;
 import Application.service.impl.WeatherStatServiceImpl;
-import com.google.gson.Gson;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
-
-import javax.annotation.Resource;
-import java.util.Calendar;
 
 
 @Controller
@@ -29,21 +23,21 @@ public class MainController {
     //Method to response Local weather
 
     @GetMapping(path="/getweather")
-    public @ResponseBody String getWeather(){
-        return new Gson().toJson(weatherStatService.getWeather());
+    public @ResponseBody String getWeather() throws Exception{
+        return new ObjectMapper().writeValueAsString(weatherStatService.getWeather());
     }
     //Method to get statistic from all weather which is on DB
 
     @GetMapping(path = "/stat" )
-    public @ResponseBody String getStat(){
-        return new Gson().toJson(weatherStatService.getStatistic());
+    public @ResponseBody String getStat() throws Exception{
+        return new ObjectMapper().writeValueAsString(weatherStatService.getStatistic());
     }
 
     //Method for get statistic about a certain period
 
     @GetMapping(path = "/datepicker")
-    public @ResponseBody String getStatFrom(@RequestParam(defaultValue = "0") String startDate, @RequestParam(defaultValue = "0") String endDate){
-     return new Gson().toJson(weatherStatService.getStatisticFrom(startDate,endDate));
+    public @ResponseBody String getStatFrom(@RequestParam(defaultValue = "0") String startDate, @RequestParam(defaultValue = "0") String endDate) throws Exception{
+     return new ObjectMapper().writeValueAsString(weatherStatService.getStatisticFrom(startDate,endDate));
     }
 
     // get all data from DB

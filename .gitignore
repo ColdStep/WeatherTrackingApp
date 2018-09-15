@@ -3,7 +3,7 @@
 *.class
 
 /src/main/java/Main.java
-
+/src/test/*
 
 *.iml
 *.war

@@ -18,7 +18,7 @@ public interface WeatherStatRepository extends CrudRepository<WeatherStat,Intege
     @Transactional
     @Modifying
     @Query(value = "UPDATE weather_stat w SET w.temperature = ?1, w.weather = ?2 WHERE w.date = ?3 AND  w.city_name = ?4",nativeQuery = true)
-    void updateWeather( String temp ,String weather ,String date, String city);
+    void updateWeather( int temp ,String weather ,String date, String city);
 
     @Query(value = "SELECT * FROM weather_stat w WHERE w.date BETWEEN ?1 AND ?2 ORDER BY w.date", nativeQuery = true)
     List<WeatherStat> getFromPeriod(String startDate, String endDate);
