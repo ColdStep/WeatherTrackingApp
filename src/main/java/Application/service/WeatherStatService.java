@@ -6,10 +6,10 @@ import Application.model.entity.WeatherStat;
 
 public interface WeatherStatService {
 
-    public WeatherResult getWeather();
-    public WeatherStatisticDto getStatistic();
-    public WeatherStatisticDto getStatisticFrom(String startDate, String endDate);
-    public Iterable<WeatherStat> getAll();
-    public String deleteAll();
+    WeatherResult getWeather();
+    WeatherStatisticDto getStatistic();
+    WeatherStatisticDto getStatisticFrom(String startDate, String endDate);
+    Iterable<WeatherStat> getAll();
+    String deleteAll();
 
 }
