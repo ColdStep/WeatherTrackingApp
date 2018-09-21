@@ -5,7 +5,6 @@ import Application.model.WeatherComponent.WeatherResult;
 import Application.model.entity.WeatherStat;
 import Application.repository.WeatherStatRepository;
 import Application.service.WeatherStatService;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,19 +33,20 @@ public class WeatherStatServiceImpl implements WeatherStatService {
             e.printStackTrace();
         }
 
-        WeatherStat weatherStat = new WeatherStat();
-        weatherStat.setCityName(weatherResult.getName());
-        weatherStat.setCountry(weatherResult.getSys().getCountry());
-        weatherStat.setDate(new java.sql.Date(new Date(weatherResult.getDt()*1000).getTime()));
-        weatherStat.setTemperature(weatherResult.getMain().getTemp());
-        weatherStat.setHumidity(weatherResult.getMain().getHumidity());
-        weatherStat.setPressure(weatherResult.getMain().getPressure());
-        weatherStat.setWeather(weatherResult.getWeather().toString());
-        weatherStat.setCoord(weatherResult.getCoord().toString());
-        weatherStat.setWind(weatherResult.getWind().toString());
-        weatherStat.setCityCod(weatherResult.getCod());
-        weatherStat.setSunrise(new java.sql.Date(new Date(weatherResult.getSys().getSunrise()*1000).getTime()));
-        weatherStat.setSenset(new java.sql.Date(new Date(weatherResult.getSys().getSunset()*1000).getTime()));
+        WeatherStat weatherStat = new WeatherStat(
+                weatherResult.getName(),
+                weatherResult.getSys().getCountry(),
+                new java.sql.Date(new Date(weatherResult.getDt()*1000).getTime()),
+                weatherResult.getMain().getTemp(),
+                weatherResult.getMain().getHumidity(),
+                weatherResult.getMain().getPressure(),
+                weatherResult.getWeather().toString(),
+                weatherResult.getCoord().toString(),
+                weatherResult.getWind().toString(),
+                weatherResult.getCod(),
+                new java.sql.Date(new Date(weatherResult.getSys().getSunrise()*1000).getTime()),
+                new java.sql.Date(new Date(weatherResult.getSys().getSunset()*1000).getTime()));
+
 
         if  (weatherStatRepository.existsByDate(weatherStat.getDate().toString(),weatherStat.getCityName()).toString().matches("1")){
             weatherStatRepository.updateWeather(

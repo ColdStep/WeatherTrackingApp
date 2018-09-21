@@ -51,6 +51,32 @@ public  class WeatherStat {
     }
 
 
+    public WeatherStat(String cityName,
+                       String country,
+                       Date date,
+                       int temperature,
+                       int humidity,
+                       int pressure,
+                       String weather,
+                       String coord,
+                       String wind,
+                       int cityCod,
+                       Date sunrise,
+                       Date senset) {
+        this.cityName = cityName;
+        this.country = country;
+        this.date = date;
+        this.temperature = temperature;
+        this.humidity = humidity;
+        this.pressure = pressure;
+        this.weather = weather;
+        this.coord = coord;
+        this.wind = wind;
+        this.cityCod = cityCod;
+        this.sunrise = sunrise;
+        this.senset = senset;
+    }
+
     public long getId() {
         return id;
     }
